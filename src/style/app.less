@@ -1,0 +1,47 @@
+@import "./variables.less";
+
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: v-sans, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 0.05rem;
+}
+
+pre {
+  font-family: v-mono, monospace;
+}
+
+* {
+  vertical-align: middle;
+}
+
+.n-message *,
+.n-base-slot-machine-number {
+  vertical-align: unset;
+}
+
+.n-input-wrapper,
+.n-input__input,
+.n-input__input-el {
+  text-decoration: inherit;
+}
+
+.page {
+  min-height: 100vh;
+}
+
+.inner-page {
+  padding: 20px 40px;
+}
+
+.ptp-image-background {
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.card {
+  border-radius: @card-radius;
+  padding: 10px 20px;
+}
