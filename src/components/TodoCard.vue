@@ -1,10 +1,12 @@
 <template>
   <n-config-provider :theme-overrides="{ common: { inputColor: 'transparent' } }">
-    <n-thing class="card todo-card">
-      <template #avatar>
-        <ion-icon name="checkbox" size="18px"></ion-icon>
+    <n-card class="card todo-card">
+      <template #header>
+        <n-space>
+          <ion-icon name="checkbox" size="18px"></ion-icon>
+          <n-text class="card-title">{{ $t('dashboard.todo.title') }}</n-text>
+        </n-space>
       </template>
-      <template #header>{{ $t('dashboard.todo.title') }}</template>
       <template #header-extra>
         <n-button text @click="addTodoItem">
           <ion-icon name="add" size="24px"></ion-icon>
@@ -24,7 +26,7 @@
           ></n-checkbox>
           <n-input
             v-model:value="item.task"
-            :style="{ textDecoration: item.checked ? 'line-through' : 'unset' }"
+            :style="{ textDecoration: item.checked ? 'line-through' : 'unset', flex: 1 }"
             @blur="updateTodoItem(item)"
           />
           <n-popconfirm @positive-click="deleteTodoItem(item.id)">
@@ -35,26 +37,26 @@
             </template>
             <template #trigger>
               <n-button text type="error">
-                <ion-icon name="close" size="18px"></ion-icon>
+                <ion-icon name="close" size="24px"></ion-icon>
               </n-button>
             </template>
             {{ $t('confirm_delete') }}
           </n-popconfirm>
         </n-space>
       </n-space>
-    </n-thing>
+    </n-card>
   </n-config-provider>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { NThing, NCheckbox, NSpace, NButton, NList, NInput, NConfigProvider, NPopconfirm } from 'naive-ui'
+import { NCard, NCheckbox, NSpace, NButton, NList, NInput, NConfigProvider, NPopconfirm, NText } from 'naive-ui'
 import IonIcon from '@/components/IonIcon.vue'
 
 export default defineComponent({
   name: 'TodoCard',
   components: {
-    NThing,
+    NCard,
     NConfigProvider,
     NCheckbox,
     NButton,
@@ -62,6 +64,7 @@ export default defineComponent({
     NList,
     NInput,
     NPopconfirm,
+    NText,
     IonIcon
   },
   data() {
@@ -130,5 +133,9 @@ export default defineComponent({
   display: flex;
   justify-content: space-between !important;
   align-items: center;
+
+  &:deep(> div:nth-child(2)) {
+    flex: 1;
+  }
 }
 </style>

@@ -13,7 +13,6 @@
     <n-space vertical>
       <subject-card></subject-card>
       <todo-card></todo-card>
-      <n-input></n-input>
     </n-space>
   </div>
 </template>
