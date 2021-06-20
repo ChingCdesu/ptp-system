@@ -4,7 +4,7 @@ import * as ResponseCode from "../rc"
 export default [
   {
     request: {
-      url: '/api/v1/module',
+      url: '/api/v1/modules',
       method: "GET",
     },
     response: (config: AxiosRequestConfig) => [200, {

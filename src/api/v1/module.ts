@@ -1,6 +1,6 @@
-import BaseApi, { IBaseModel } from "./base"
+import BaseApi from "./base"
+import { IBaseModel } from './interfaces'
 import request from './request'
-import store from "@/store"
 import { I18nField } from "@/i18n"
 
 export interface IModuleModel extends IBaseModel {
@@ -9,13 +9,12 @@ export interface IModuleModel extends IBaseModel {
   path: string,
   component: string,
   children: IModuleModel[] | null,
-  icon: string,
-  meta: any
+  icon: string
 }
 
 class ModuleApi extends BaseApi<IModuleModel> {
   constructor() {
-    super('module')
+    super('modules')
   }
 
   async list() {

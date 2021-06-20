@@ -76,21 +76,15 @@ export default defineComponent({
     if (store.state.user.user_id && store.state.user.auto_login) {
       const userApi = new UserApi()
       userApi.auto_login(store.state.user.user_id, store.state.user.token)
-        .then(response => {
-          if (response.data.code === 0) {
-            msgBox = message.value.loading(i18n.global.t('login.tips.auto_login_success'))
-            const { obj } = response.data
-            store.dispatch('setUserId', obj.id)
-            store.dispatch('setUserToken', obj.token)
-            router.push({ name: 'dashboard' }).then(() => {
-              setTimeout(() => {
-                msgBox.destroy()
-              }, 500);
-            })
-          } else {
-            msgBox.type = "info"
-            msgBox.content = i18n.global.t('login.tips.please_relogin')
-          }
+        .then(user => {
+          msgBox = message.value.loading(i18n.global.t('login.tips.auto_login_success'))
+          store.dispatch('setUserId', user.id)
+          store.dispatch('setUserToken', user.token)
+          router.push({ name: 'dashboard' }).then(() => {
+            setTimeout(() => {
+              msgBox.destroy()
+            }, 500);
+          })
         })
         .catch(err => {
           console.error(err)
@@ -132,27 +126,21 @@ export default defineComponent({
     onLanguageChanged() {
       this.rules.username.message = this.$t('login.please_input_username')
       this.rules.password.message = this.$t('login.please_input_password')
-      this.formRef.validate((error: any) => {})
+      this.formRef.validate((error: any) => { })
     },
     login() {
       const userApi = new UserApi()
       let msgBox: any = null
       store.dispatch('setAutoLogin', this.value.auto_login)
-      userApi.login(this.value.username, this.value.password, this.value.auto_login).then(response => {
-        if (response.data.code === 0) {
-          msgBox = this.message.loading(this.$t('login.tips.login_success'))
-          const { obj } = response.data
-          store.dispatch('setUserId', obj.id)
-          store.dispatch('setUserToken', obj.token)
-          router.push({ name: 'dashboard' }).then(() => {
-            setTimeout(() => {
-              msgBox.destroy()
-            }, 500);
-          })
-        } else {
-          msgBox.type = "error"
-          msgBox.content = this.$t('login.tips.login_failed', { err: response.data.prompt })
-        }
+      userApi.login(this.value.username, this.value.password, this.value.auto_login).then(user => {
+        msgBox = this.message.loading(this.$t('login.tips.login_success'))
+        store.dispatch('setUserId', user.id)
+        store.dispatch('setUserToken', user.token)
+        router.push({ name: 'dashboard' }).then(() => {
+          setTimeout(() => {
+            msgBox.destroy()
+          }, 500);
+        })
       }).catch(err => {
         console.error(err)
         msgBox.type = "error"

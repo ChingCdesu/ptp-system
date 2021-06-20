@@ -62,16 +62,22 @@ export default defineComponent({
             {
               id: 14,
               name: '完成开题报告',
+              start_time: '2021-6-20 00:00:00',
+              end_time: '2021-6-27 00:00:00',
               checked: true
             },
             {
               id: 14,
               name: '完成开题报告',
+              start_time: '2021-6-20 00:00:00',
+              end_time: '2021-6-27 00:00:00',
               checked: true
             },
             {
               id: 14,
               name: '完成开题报告',
+              start_time: '2021-6-20 00:00:00',
+              end_time: '2021-6-27 00:00:00',
               checked: false
             }
           ]

@@ -34,5 +34,8 @@ export default {
   dashboard: {
     todo: { title: '待办事项' },
     my_subject: { title: '我的课题' }
+  },
+  plan: {
+    task_name: '计划任务名称'
   }
 }

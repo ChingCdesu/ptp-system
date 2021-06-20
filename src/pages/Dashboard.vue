@@ -1,14 +1,8 @@
 <template>
-  <div class="inner-page" :native-scrollbar="false">
+  <div class="inner-page">
     <n-h1 :strong="true">
       <n-text>{{ title }}</n-text>
     </n-h1>
-    <!-- <n-config-provider :theme-overrides="{ common: { inputColor: 'transparent' } }">
-      <n-space :align="'center'" :item-style="{ textAlign: 'center' }" >
-        <ion-icon :name="'calendar'" :size="'18px'" />
-        <n-date-picker v-model:value="timestamp" type="date" :style="{ flex: 0 }" />
-      </n-space>
-    </n-config-provider>-->
     <n-divider />
     <n-space vertical>
       <subject-card></subject-card>

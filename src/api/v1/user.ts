@@ -1,30 +1,31 @@
-import BaseApi, { IBaseModel } from "./base"
-import { IRoleModel } from "./role"
+import BaseApi from "./base"
+import { IUserModel } from "./interfaces"
 import request from "./request"
-
-export interface IUserModel extends IBaseModel {
-  username: string
-  password: string
-  role: IRoleModel
-  token: string | null
-  enabled: boolean
-}
+import * as ResponseCode from "./rc"
 
 class UserApi extends BaseApi<IUserModel> {
   constructor() {
     super("user")
   }
 
-  async login(username: string, password: string, auto_login: boolean) {
-    return await request.get("/user/login", {
+  async login(username: string, password: string, auto_login: boolean): Promise<IUserModel> {
+    const response = await request.get("/user/login", {
       params: { username, password, auto_login, type: "password" },
     })
+    if (response.data.code !== ResponseCode.SUCCESS) {
+      throw { message: response.data.message, prompt: response.data.prompt }
+    }
+    return response.data.obj
   }
 
-  async auto_login(user_id: number | null, token: string | null) {
-    return await request.get("/user/login", {
-      params: {user_id, token, type: 'token'}
+  async auto_login(user_id: number | null, token: string | null): Promise<IUserModel> {
+    const response = await request.get("/user/login", {
+      params: { user_id, token, type: "token" },
     })
+    if (response.data.code !== ResponseCode.SUCCESS) {
+      throw { message: response.data.message, prompt: response.data.prompt }
+    }
+    return response.data.obj
   }
 
   async logout() {}
